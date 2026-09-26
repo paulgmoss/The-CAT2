@@ -1,0 +1,98 @@
+/* The CAT — color tokens
+   Sourced from pixel-sampling the live overview screenshot
+   (paulgmoss.github.io/The-CAT). No source repo/Figma was available. */
+:root {
+  /* ---- base palette ---- */
+  --cat-navy-950: #140f50;   /* primary ink / primary button bg */
+  --cat-navy-900: #1b1640;
+  --cat-indigo-700: #3b2fa9; /* CLO04 bar */
+  --cat-blue-600: #1548ff;   /* CLO02 bar, bright accent */
+  --cat-violet-500: #836bff; /* "Alignment" headline word, CLO03 bar */
+  --cat-violet-400: #8f7aff; /* secondary pill button bg */
+  --cat-cream-100: #F8EFE0;  /* page background */
+  --cat-sand-200: #eceae0;   /* track / neutral bg (progress rails, badges) */
+  --cat-sand-300: #e4e0d2;
+  --cat-stone-400: #a4a0b4;  /* muted badge text, "INPUT" label */
+  --cat-stone-500: #8b87a0;
+  --cat-white: #ffffff;
+
+  /* ---- semantic aliases ---- */
+  --color-bg-page: var(--cat-cream-100);
+  --color-bg-surface: var(--cat-white);
+  --color-bg-surface-muted: var(--cat-sand-200);
+  --color-border-subtle: var(--cat-sand-300);
+
+  --color-text-primary: var(--cat-navy-950);
+  --color-text-muted: var(--cat-stone-500);
+  --color-text-on-dark: var(--cat-white);
+
+  --color-accent-primary: var(--cat-navy-950);   /* primary button */
+  --color-accent-secondary: var(--cat-violet-400); /* secondary button */
+  --color-accent-highlight: var(--cat-violet-500); /* headline accent word, links */
+
+  --color-data-1: var(--cat-navy-950); /* CLO01 */
+  --color-data-2: var(--cat-blue-600); /* CLO02 */
+  --color-data-3: var(--cat-violet-500); /* CLO03 */
+  --color-data-4: var(--cat-indigo-700); /* CLO04 */
+
+  --color-badge-bg: var(--cat-sand-200);
+  --color-badge-text: var(--cat-stone-400);
+}
+
+/* The CAT — type tokens
+   FONT SUBSTITUTION NOTICE: no webfont files or Figma type styles were
+   available (source repo contains no code). Families below are the
+   closest Google Fonts matches to the live screenshot and are flagged
+   in readme.md — please supply the real font files if you have them. */
+
+
+:root {
+  --font-serif-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+
+  /* semantic aliases */
+  --text-display: 600 64px/1.08 var(--font-serif-display);
+  --text-display-italic: 500 italic 28px/1.4 var(--font-serif-display);
+  --text-h1: 700 40px/1.15 var(--font-serif-display);
+  --text-h2: 600 28px/1.25 var(--font-serif-display);
+  --text-wordmark: 600 26px/1 var(--font-serif-display);
+
+  --text-nav: 500 17px/1.4 var(--font-sans);
+  --text-body: 400 19px/1.55 var(--font-sans);
+  --text-body-sm: 400 15px/1.5 var(--font-sans);
+  --text-button: 600 16px/1 var(--font-sans);
+  --text-eyebrow: 500 12px/1.4 var(--font-sans);
+
+  --text-data-label: 500 15px/1.2 var(--font-mono);
+  --text-data-value: 500 15px/1.2 var(--font-mono);
+  --text-tag: 500 12px/1 var(--font-mono);
+  --text-kicker-mono: 600 13px/1.2 var(--font-mono);
+
+  --tracking-wordmark-sub: 0.12em;
+  --tracking-tag: 0.04em;
+}
+
+/* The CAT — spacing, radius, shadow tokens */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 1px 2px rgba(20, 15, 80, 0.04);
+  --shadow-panel: 0 1px 3px rgba(20, 15, 80, 0.06);
+
+  --border-width-hairline: 1px;
+  --container-max: 1440px;
+}

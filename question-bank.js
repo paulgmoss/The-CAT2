@@ -1,0 +1,273 @@
+/* CAT, facilitation question bank.
+   Consumed by question-bank.html (the full reference page) and by scenarios-embed.js,
+   which makes any scripted LD line carrying a `qb:'<entry id>'` key clickable.
+   To add a prompt: append to ENTRIES. Nothing else needs changing. */
+(function () {
+  const MOMENTS = [
+    { id: 'opening', label: 'Opening the session', blurb: 'Before any numbers are entered. The work here is getting the academic to say out loud what they believe the course does, so the mapping has something to be checked against.' },
+    { id: 'diagnosing', label: 'Diagnosing what the numbers show', blurb: 'Tab 5 has produced something unexpected. The work here is resisting the urge to explain it, and handing the diagnosis back to the academic.' },
+    { id: 'testing', label: 'Testing a change', blurb: 'The academic wants to adjust something. The work here is making the direction of the change deliberate, and making sure an absence is a decision rather than an oversight.' },
+    { id: 'resolving', label: 'Resolving a readiness conflict', blurb: 'Demand has outrun what has actually been taught by that week. The work here is opening up the second lever, the teaching sequence, before the academic defaults to lowering the readiness level.' },
+    { id: 'rubric', label: 'Checking the rubric', blurb: 'The mapping is settled, so Tab 6 can be trusted. The work here is comparing the academic\u2019s real rubric against it without turning an estimate into a target, and surfacing the weighting hiding inside any criterion mapped to more than one CLO.' },
+    { id: 'closing', label: 'Closing the session', blurb: 'The mapping is settled and changes have been agreed. The work here is making sure the session leaves behind a record someone can act on, rather than a good conversation nobody wrote down.' },
+  ];
+
+  const PRINCIPLES = [
+    { id: 'accumulation', label: 'Demand accumulation', blurb: 'The implied assignment weighting in Tab 5 is the sum of every CLO row in Tab 4. No single row looks unreasonable; the total can still be a course nobody designed.' },
+    { id: 'conservation', label: 'Conservation of alignment', blurb: "Within one CLO's row the shares are drawn from that CLO's own fixed budget. Raising its share in one assignment necessarily lowers it elsewhere in the row, so the direction of an adjustment matters as much as its size." },
+    { id: 'zero', label: 'Deliberate zero', blurb: 'A CLO not assessed in an assignment is a legitimate design decision when that CLO\u2019s assessment work is already complete. The zero has to be named as intentional, or it reads as a gap.' },
+    { id: 'ceiling', label: 'Readiness ceiling', blurb: 'Demand at an assignment cannot exceed what has been taught by that week. The tool offers to lower the readiness level; changing what is taught beforehand is the other, usually better, lever.' },
+    { id: 'resequencing', label: 'Resequencing', blurb: 'Moving content to clear a conflict is never free. Whatever occupied that week has to go somewhere, and deciding where is itself a design choice worth making on purpose.' },
+    { id: 'scopeoftab6', label: 'What moves the rubric', blurb: 'Tab 6 is calculated per assignment from Tab 1 and Tab 4 only. Demand changes move rubric composition; readiness and resequencing changes do not. Every assignment whose demand value moved needs the rubric check, not just the one that prompted it, and a stable total in Tab 5 is no guarantee the composition underneath it held still.' },
+    { id: 'upstream', label: 'The ceiling is upstream', blurb: "A CLO's total contribution across all assignments can never exceed its Tab 1 weighting. When an assignment cannot reach its intended share even with that CLO's row fully concentrated on it, the mapping is not the constraint: the weighting is." },
+    { id: 'multimapped', label: 'Multi-mapped criteria', blurb: 'A criterion mapped to more than one CLO carries an implicit weighting between them that has never been stated. Asking how the criterion is actually marked makes that weighting explicit, and it is usually not the even weighting the rubric implies.' },
+  ];
+
+  const ENTRIES = [
+    {
+      id: 'map-how-resourced',
+      moment: 'opening',
+      principle: null,
+      prompt: "Then let's map how the course is currently being resourced, and what each CLO is contributing to each assignment.",
+      when: 'Opening with an academic who is confident they already know the answer. It frames the session as describing the course together, not checking their judgement.',
+      response: 'Agreement without defensiveness. The academic has not been asked to justify anything yet, so there is nothing to defend, and they will usually volunteer their expected split unprompted, which is exactly what you want on the record before Tab 5 runs.',
+      from: [{ name: 'Omar · Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'expect-to-see',
+      moment: 'opening',
+      principle: null,
+      prompt: 'Before we look at Tab 5, what do you expect to see?',
+      when: "Immediately before revealing the implied weighting. Always ask it, a prediction the academic has committed to is what makes the gap legible to them.",
+      response: 'A confident restatement of the stated split. If the tool then agrees, the academic owns the confirmation; if it does not, the gap is theirs to explain rather than yours to point out.',
+      from: [{ name: 'David · History', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'sum-of-rows',
+      moment: 'diagnosing',
+      principle: 'accumulation',
+      prompt: "This number isn't something you entered directly. It's the sum of all four of your CLO rows. Can you see where the weight's coming from?",
+      when: "Explaining Tab 5's aggregation before asking the academic to diagnose it. Use it the moment they treat the output as a mistake to be corrected rather than a total to be read.",
+      response: 'They go back through their own rows and find the pattern themselves, usually that three of four CLOs lean the same way. Naming it themselves is what makes the next revision theirs.',
+      from: [{ name: 'Omar · Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }, { name: 'Priya · Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'accumulates-fast',
+      moment: 'diagnosing',
+      principle: 'accumulation',
+      prompt: 'Five per cent here, five per cent there, none of it looks significant on its own. But it accumulates fast.',
+      when: 'Establishing why small per-row decisions matter, once the academic has spotted the pattern but is still inclined to treat the gap as a rounding error.',
+      response: "Recognition that each decision was individually reasonable, which is the point: it removes blame from the diagnosis. Follow it with what has been resourced around the stated split, tutorial time, LMS resources, feedback load.",
+      from: [{ name: 'Omar · Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'readiness-vs-demand',
+      moment: 'diagnosing',
+      principle: 'ceiling',
+      prompt: 'You said this CLO reaches Developing by that assignment, not just Foundational. Does the demand row reflect that?',
+      when: 'The demand row treats two assignments as equally light when Tab 3 shows readiness has moved substantially between them.',
+      response: 'The academic separates two things they had collapsed: when a CLO is fully demonstrable under pressure, and when it is ready to be assessed at all. Usually the middle assignment can carry more than they gave it.',
+      from: [{ name: 'Priya · Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'what-does-that-tell-you',
+      moment: 'diagnosing',
+      principle: null,
+      prompt: 'That is a real drop from what you had planned. What does that tell you about the assignment itself?',
+      when: 'A revision has moved an assignment several points away from its stated weight and the academic has accepted the new figure without comment. Ask before moving on.',
+      response: 'Often a long-held, unexamined observation surfaces, students finding an early task harder than it should be, a final assignment that always felt overloaded. The mapping gives the observation a number, which turns it into something actionable rather than a hunch.',
+      from: [{ name: 'Omar · Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'weight-has-to-move',
+      moment: 'testing',
+      principle: 'conservation',
+      prompt: "If one assignment's carrying more than it should, the fix is never just to lower it, the weight has to move somewhere. Which CLO, and which assignment should absorb it?",
+      when: 'Before an academic attempts an isolated fix. Asked early it prevents the wasted move; asked late it explains one. Pair it with the constraint that closes off the easy answer: which CLO could actually be reduced there without leaving something unassessed?',
+      response: 'They name a specific CLO and a specific destination, which turns a vague intention to reduce into a directional decision that can be checked.',
+      from: [{ name: 'Omar · Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }, { name: 'Priya · Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'went-up-without',
+      moment: 'testing',
+      principle: 'conservation',
+      prompt: 'Can you see how that assignment went up without the other two coming down?',
+      when: 'After an adjustment makes the gap worse, the most productive moment in a session, and the one to slow down rather than rescue.',
+      response: 'The academic diagnoses their own directional error: reducing a CLO\u2019s share in the other assignments freed more of its budget to land where they wanted less. They rarely make the same mistake again.',
+      from: [{ name: 'Priya · Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'what-would-it-mean',
+      moment: 'testing',
+      principle: 'zero',
+      prompt: "What would it mean if it didn't need a third assessment point?",
+      when: 'The academic has noticed a CLO is fully taught and already substantially assessed, and is wondering aloud whether the final assignment needs it.',
+      response: 'They articulate the zero as a claim about the earlier assignment rather than a gap in the later one: that the assessment work is already complete. Name it as a deliberate zero before moving on, so it survives the review.',
+      from: [{ name: 'Omar · Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }, { name: 'Priya · Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'dont-want-to-adjust',
+      moment: 'testing',
+      principle: null,
+      prompt: "You don't want to adjust anything?",
+      when: 'The output is a few points off and the academic is comfortable. Ask it anyway, it makes accepting the mapping an explicit decision rather than a shrug.',
+      response: 'A stated tolerance and the reasoning behind it. Closing a three-point gap is rarely worth it; the value is the academic saying why, which is what the review record needs.',
+      from: [{ name: 'David · History', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'accept-the-suggestion',
+      moment: 'resolving',
+      principle: 'ceiling',
+      prompt: "Would you accept the tool's suggestion, or is there another way to close this gap?",
+      when: 'At a readiness warning, before the academic defaults to lowering the readiness level because it is the option the tool put in front of them.',
+      response: "Often a firm no, they want students demonstrating that CLO by that assignment. That refusal is the useful answer: it rules out one lever and forces attention onto the teaching sequence.",
+      from: [{ name: 'Omar · Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }, { name: 'Priya · Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'whats-taught-before',
+      moment: 'resolving',
+      principle: 'ceiling',
+      prompt: "So the other lever is what's taught before that week. What's currently there?",
+      when: 'Investigating whether a readiness conflict can be resolved by resequencing rather than by lowering demand or readiness.',
+      response: 'The academic finds the supporting content sitting after the assessment that depends on it, a sequencing accident nobody had cause to notice until demand and readiness were shown on the same screen.',
+      from: [{ name: 'Priya · Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'move-it-earlier',
+      moment: 'resolving',
+      principle: null,
+      prompt: 'What happens if you move it earlier?',
+      when: 'Modelling a resequencing option before committing to it. Model it in the tool rather than discussing it, the readiness figure settles the argument.',
+      response: 'A readiness figure that either clears the minimum or does not. Either way the conversation stops being about intuition and becomes about a number at a specific week.',
+      from: [{ name: 'Omar · Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }, { name: 'Priya · Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'when-to-check-sequence',
+      moment: 'resolving',
+      principle: null,
+      prompt: "Now that the mapping's settled, this is the point to check whether the readiness sequence actually supports it.",
+      when: 'Moving from demand into readiness. Say why the check comes now: if you check while the mapping is still moving, you are checking against numbers that are about to change.',
+      response: 'The academic treats the readiness pass as the next stage of the same task rather than a second round of scrutiny, and warnings that appear are read as consequences of their own revisions.',
+      from: [{ name: 'Omar · Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'something-has-to-move-out',
+      moment: 'resolving',
+      principle: 'resequencing',
+      prompt: 'So if that moves in, something has to move out. What happens to what was there?',
+      when: 'The academic has found a resequencing that clears the conflict and is ready to move on. This is the question they will not ask themselves.',
+      response: 'They reassess the displaced session on its merits, often finding it was doing less work than assumed, and place it somewhere with a more deliberate purpose than the one it had by default.',
+      from: [{ name: 'Omar · Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }, { name: 'Priya · Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'scope-of-the-change',
+      moment: 'rubric',
+      principle: 'scopeoftab6',
+      prompt: "You changed the whole CLO row, not just one number in it, so which assignments' rubric compositions have actually shifted?",
+      when: 'Opening the rubric check after a demand revision, before the academic assumes only the assignment they were worried about needs re-checking.',
+      response: 'They identify every assignment whose value moved, not just the headline one, and the rubric check gets scoped correctly. It also draws the line between demand changes, which move Tab 6, and readiness changes, which do not.',
+      from: [{ name: 'Omar \u00b7 Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'estimates-not-targets',
+      moment: 'rubric',
+      principle: null,
+      prompt: "Tab 6's percentages are estimates, not exact targets. A gap of about five points or more is usually worth a look.",
+      when: 'Opening the rubric check, before the academic starts chasing decimal-level precision against a figure the tool derived from their own mapping.',
+      response: 'The academic reads the comparison as a prompt to think rather than a score to hit, and small gaps get left alone, which keeps attention on the one or two that are actually telling you something.',
+      from: [{ name: 'Omar \u00b7 Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }, { name: 'Priya \u00b7 Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'nowhere-further-to-go',
+      moment: 'diagnosing',
+      principle: 'upstream',
+      prompt: "That row has nowhere further to go. If the mapping is already as concentrated as it can be and the number still will not reach, what does that tell you about the weighting itself?",
+      when: 'An assignment is short of its intended share and every remaining move in the mapping makes another assignment worse. Ask it before a third round of re-arranging demand.',
+      response: 'The academic recognises the arithmetic ceiling for themselves: a CLO cannot contribute more than its Tab 1 weighting, however it is distributed. The conversation moves back a tab, to what the course actually claims each outcome is worth.',
+      from: [{ name: 'Aisha \u00b7 Psychology', href: 'stream-a-guide.html#pathway-a-tutorial' }],
+    },
+    {
+      id: 'implicit-weighting',
+      moment: 'rubric',
+      principle: 'multimapped',
+      prompt: "When you're actually marking that criterion, how much of it is [outcome A] versus [outcome B]?",
+      when: 'A criterion is mapped to more than one CLO and the internal weighting between them has never been made explicit.',
+      response: 'A weighting the academic has been applying for years without stating, often lopsided, and often the whole explanation for the gap against Tab 6. Ask how they mark it in practice, not how it should be marked.',
+      from: [{ name: 'Omar \u00b7 Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }, { name: 'Priya \u00b7 Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'two-ways-to-close',
+      moment: 'rubric',
+      principle: null,
+      prompt: 'There are two ways to handle it: recalibrate the balance inside the criterion, or move marks between your existing criteria.',
+      when: 'A rubric gap needs closing. Offer both before the academic assumes the only fix is restructuring a rubric they are attached to.',
+      response: 'Most take the option that leaves the rubric document alone, because it closes the gap without changing how they judge anything. Separating the criterion stays available as a later decision rather than a precondition.',
+      from: [{ name: 'Omar \u00b7 Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }, { name: 'Priya \u00b7 Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'stable-total-shifted-rubric',
+      moment: 'rubric',
+      principle: 'scopeoftab6',
+      prompt: "That assignment's total in Tab 5 barely moved. Does that mean its rubric doesn't need a second look?",
+      when: 'An assignment\u2019s overall weighting is stable but several of its CLO rows changed during the session.',
+      response: 'The academic opens Tab 6 for an assignment they had written off and finds two CLOs have traded several points inside it. It establishes that the rubric check is scoped by which rows moved, not by which totals moved.',
+      from: [{ name: 'Priya \u00b7 Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'reasonable-match-once',
+      moment: 'rubric',
+      principle: 'multimapped',
+      prompt: 'That balance was a reasonable match once. Has anything changed since?',
+      when: "A multi-mapped criterion's internal marking judgement was set correctly at some point but never revisited after a later mapping change.",
+      response: 'The academic separates a rubric that was never right from one that has drifted, which is a much easier thing to accept and to fix. Drift is the common case, and naming it that way keeps the conversation off their original judgement.',
+      from: [{ name: 'Priya \u00b7 Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'useful-beyond-the-numbers',
+      moment: 'rubric',
+      principle: 'multimapped',
+      prompt: 'Would separating the criterion be useful beyond fixing the numbers?',
+      when: 'Distinguishing a numeric realignment from a genuine case for restructuring a criterion that asks markers to weigh two different judgements at once.',
+      response: 'The academic weighs marking consistency rather than alignment, and usually lands on doing both, but separately: guidance updated now, the rubric restructured at its next formal revision.',
+      from: [{ name: 'Priya \u00b7 Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'alignment-vs-consistency',
+      moment: 'rubric',
+      principle: 'multimapped',
+      prompt: 'That fixed the alignment. Separating the criterion would be about clarity for whoever is marking it. They do not have to happen at the same time.',
+      when: 'The numbers are resolved but the academic is still uneasy that one criterion is doing two jobs.',
+      response: 'The unease gets named as a marking-consistency question rather than an unfinished mapping one, which lets the session close cleanly and leaves the academic a deliberate next step for their own rubric revision.',
+      from: [{ name: 'Omar \u00b7 Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+    {
+      id: 'download-the-record',
+      moment: 'closing',
+      principle: null,
+      prompt: "Let's download what we've done, so we can refer to it when we make the adjustments to the LMS.",
+      when: 'Closing a session that produced changes. Export before anyone leaves, the mapping is only useful downstream if it exists outside the tool.',
+      response: 'The session stops being a conversation and becomes a working document: the record for the assurance of learning review, and the checklist for the LMS, run sheet, and feedback changes the mapping implies.',
+      from: [{ name: 'Omar · Environmental Science', href: 'stream-a-guide.html#pathway-a-scenarios' }, { name: 'Priya \u00b7 Nursing', href: 'stream-a-guide.html#pathway-a-scenarios' }],
+    },
+  ];
+
+  const PHASES = [
+    { id: 'p1', label: 'Mapping the course', tabs: 'Tabs 1 to 5', entries: ['map-how-resourced', 'expect-to-see', 'readiness-vs-demand', 'sum-of-rows', 'accumulates-fast', 'what-would-it-mean'] },
+    { id: 'p2', label: 'Adjusting the mapping', tabs: 'Tab 4', entries: ['weight-has-to-move', 'went-up-without', 'what-does-that-tell-you', 'dont-want-to-adjust'] },
+    { id: 'p3', label: 'Readiness and the rubric', tabs: 'Tab 4 with Tab 2, then Tab 6', entries: ['when-to-check-sequence', 'accept-the-suggestion', 'whats-taught-before', 'move-it-earlier', 'something-has-to-move-out', 'scope-of-the-change', 'estimates-not-targets', 'implicit-weighting', 'two-ways-to-close', 'alignment-vs-consistency', 'stable-total-shifted-rubric', 'reasonable-match-once', 'useful-beyond-the-numbers', 'download-the-record'] },
+  ];
+
+  const LOGISTICS = {
+    before: { label: 'Before you start', text: 'Ask for the course outline, the CLO list with weightings, the current assignment weights as students see them, and any rubrics already in use. If a tutor marks most of the course, their view of what actually gets rewarded is worth having in the room.' },
+    after: { label: 'Before anyone leaves', text: 'Export the mapping, and turn the conversation into a list of changes with owners: what has to happen before the next teaching period, and who does it. Write the deliberate decisions down in plain language, an unexplained zero reads as a gap to a colleague who was not in the room.' },
+  };
+
+  const byId = {};
+  ENTRIES.forEach((e) => { byId[e.id] = e; });
+  const principleById = {};
+  PRINCIPLES.forEach((p) => { principleById[p.id] = p; });
+  const momentById = {};
+  MOMENTS.forEach((m) => { momentById[m.id] = m; });
+
+  window.QBANK = { moments: MOMENTS, principles: PRINCIPLES, entries: ENTRIES, phases: PHASES, logistics: LOGISTICS, byId: byId, principleById: principleById, momentById: momentById };
+})();
