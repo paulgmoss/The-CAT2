@@ -135,7 +135,6 @@ function PathwayBBuild() {
   return (
     <div className="pab">
       <div className="pab-intro">
-        <span className="pab-eyebrow">How Pathway B works</span>
         <h2 className="pab-h2">Four ideas, each resting on the one before</h2>
       </div>
       <PabStep pathway="B" n="01" name="Assignment weights" copy={<>
