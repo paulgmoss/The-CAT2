@@ -22,10 +22,10 @@ function HeroV2() {
         </div>
       </div>
       <div className="hv3-band">
-        <p className="hv3-umbrella">The CAT is an interactive tool for curriculum designers and teaching academics that gives you a precise, visual read of how your course's components actually relate to each other, and what happens to each of them when you change any one: something you couldn't see before.</p>
+        <p className="hv3-umbrella">The CAT is an interactive tool for curriculum designers and teaching academics that gives you a precise, visual read of how a course's components actually relate to each other, and what happens to each of them when you change any one: something you couldn't see before.</p>
         <a className="hv3-find" href="#when" onClick={(e) => { e.preventDefault(); history.replaceState(null, '', '#when'); window.dispatchEvent(new CustomEvent('cat:open-tab', { detail: 'when' })); }}>
           <span className="hv3-find-eyebrow">Not sure where to start?</span>
-          <span className="hv3-find-title">Find the pathway that fits your course <OvArrow /></span>
+          <span className="hv3-find-title">Find the pathway that fits the course <OvArrow /></span>
           <span className="hv3-find-sub">Two or three quick questions</span>
         </a>
         <p className="hv3-note">The CAT is also an <a href="#research">educational research project</a>. The tool is free to use; research participation is separate and voluntary.</p>
@@ -75,15 +75,15 @@ function WhyTab() {
 const DX_CONTEXTS = [
   { id: 'verifying', num: '01', title: 'Verify an existing course', body: 'Compare what the course assesses with what it was designed to emphasise.', rel: 'A use in its own right.', when: 'An Assurance of Learning cycle, a run of student feedback, an inherited course, or a review coming up.', start: 'v1' },
   { id: 'refining', num: '02', title: 'Refine an existing course', body: 'See how a change carries through the rest of the course before you commit to it.', rel: 'Starts with a verification pass: you can’t decide what to change until you’ve checked what’s there.', when: 'The same prompts as verifying, or a change you want to test before it runs live.', start: 'r1' },
-  { id: 'designing', num: '03', title: 'Design a new course', body: 'Build the alignment between outcomes, assignments and rubrics before briefs are written.', rel: 'No verification step, since there is nothing yet to check. Pathway A only.', when: 'You’re building a course and want it aligned from the first draft.', start: 'd1' },
+  { id: 'designing', num: '03', title: 'Design a new course', body: 'Build the alignment between outcomes, assignments and rubrics before briefs are written.', rel: 'No verification step, since there is nothing yet to check. Pathway A only.', when: 'The course is being built and needs to be aligned from the first draft.', start: 'd1' },
 ];
 const DX_NODES = {
   v1: { q: 'What does the course have in place right now?', opts: [
     { l: 'Finished assignments, with rubrics or marking guides that can be tagged to CLOs', to: 'v2' },
-    { l: 'Assignments, but the rubrics are loose or still changing', to: 'A', why: 'Pathway B reads CLO emphasis from rubric criteria, so it needs rubrics that are settled. Pathway A works from your intended CLO emphasis and mapping instead, and derives the assignment weights to compare with the ones the course carries.' },
+    { l: 'Assignments, but the rubrics are loose or still changing', to: 'A', why: 'Pathway B reads CLO emphasis from rubric criteria, so it needs rubrics that are settled. Pathway A works from the intended CLO emphasis and mapping instead, and derives the assignment weights to compare with the ones the course carries.' },
   ] },
   v2: { q: 'Which question do you most want answered?', opts: [
-    { l: 'What are the assessments actually emphasising?', to: 'B', why: 'Pathway B derives the CLO weighting from the assignments and rubrics as they stand, a read of the course without your intentions shaping it.' },
+    { l: 'What are the assessments actually emphasising?', to: 'B', why: 'Pathway B derives the CLO weighting from the assignments and rubrics as they stand, a read of the course without intentions shaping it.' },
     { l: 'Do the assignment weights and teaching sequence fit what was intended?', to: 'A', why: 'Pathway A starts from the intended CLO weighting and teaching sequence, and derives the assignment weights they imply, so you can set them beside the weights the course actually carries.' },
   ] },
   r1: { q: 'Where do you think the change needs to happen?', opts: [
@@ -92,15 +92,15 @@ const DX_NODES = {
     { l: 'Not sure yet', to: 'r2' },
   ] },
   r2: { q: 'Which feels like the firmer starting point?', opts: [
-    { l: 'The assessments as they stand', to: 'B', why: 'Pathway B starts from the assessments you trust and shows the CLO emphasis they imply. Where that surprises you is usually where the change belongs.' },
-    { l: 'What each CLO is meant to carry', to: 'A', why: 'Pathway A starts from that intent and shows what the assignments and rubrics would need to be to honour it. The gap with the current course is your list of changes.' },
+    { l: 'The assessments as they stand', to: 'B', why: 'Pathway B starts from the assessments already trusted and shows the CLO emphasis they imply. Where that surprises is usually where the change belongs.' },
+    { l: 'What each CLO is meant to carry', to: 'A', why: 'Pathway A starts from that intent and shows what the assignments and rubrics would need to be to honour it. The gap with the current course is the list of changes.' },
   ] },
-  d1: { q: 'What is clearest to you right now?', opts: [
+  d1: { q: 'What is clearest right now?', opts: [
     { l: 'The outcomes, and roughly how much each matters', to: 'A', why: 'Pathway A starts exactly there: weight the CLOs, plan when each is taught, map them to assignments, and the assignment weights and rubric composition follow.' },
-    { l: 'The assignments I want to set', to: 'A', why: 'Pathway B needs finished rubrics, so it can’t run on a course that doesn’t exist yet. In Pathway A, sketch the CLO weighting first; the mapping then tells you what those assignments should weigh.' },
+    { l: 'The assignments planned', to: 'A', why: 'Pathway B needs finished rubrics, so it can’t run on a course that doesn’t exist yet. In Pathway A, sketch the CLO weighting first; the mapping then tells you what those assignments should weigh.' },
   ] },
 };
-const DX_CD_LINE = 'You can do this alone, but it’s more impactful in dialogue with a curriculum designer.';
+const DX_CD_LINE = 'It works alone, but it’s most useful as a conversation between the academic and a curriculum designer.';
 
 function Diagnostic() {
   const [ctx, setCtx] = React.useState(null);
@@ -198,7 +198,7 @@ const RD_VIEWS = {
     color: 'var(--c-red)', marker: 'rd-arrow-a',
     roles: { W: ['in', 1], R: ['in', 2], M: ['in', 3], T: ['out', 4], C: ['out', 5] },
     edges: { WM: 'f', RM: 'f', MT: 'f', MC: 'f', TC: 'f' },
-    cap: 'Start from what you intend each outcome to carry and when it is taught. Mapping those outcomes to assignments lets the tool derive what each assignment should weigh, and how each rubric or marking guide should divide its marks.',
+    cap: 'Start from what each outcome is intended to carry and when it is taught. Mapping those outcomes to assignments lets the tool derive what each assignment should weigh, and how each rubric or marking guide should divide its marks.',
   },
   B: {
     color: 'var(--c-purple)', marker: 'rd-arrow-b',
@@ -268,8 +268,8 @@ function WhatTab() {
     <React.Fragment>
       <p className="explore-panel-sub">The CAT quantifies how course learning outcomes (CLOs), summative assignments and rubrics relate, and lets you start from either end.</p>
       <div className="what-prose">
-        <p><strong>Pathway A</strong> starts from you estimating the relative importance of your CLOs (CLO weightings), when each is taught, and how they are mapped across your summative assignments. From those it derives the assignment weights and rubric composition they imply, and includes a teaching sequence planner to map readiness across your course.</p>
-        <p><strong>Pathway B</strong> starts from your summative assignments and rubrics as they are, and displays the CLO weightings derived from them.</p>
+        <p><strong>Pathway A</strong> starts from an estimate of the relative importance of the CLOs (CLO weightings), when each is taught, and how they are mapped across the summative assignments. From those it derives the assignment weights and rubric composition they imply, and includes a teaching sequence planner to map readiness across the course.</p>
+        <p><strong>Pathway B</strong> starts from the summative assignments and rubrics as they are, and displays the CLO weightings derived from them.</p>
       </div>
       <RelationshipDiagram />
     </React.Fragment>

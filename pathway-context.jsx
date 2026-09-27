@@ -5,7 +5,7 @@ const PC_CONTENT = {
       tab: 'I’m verifying',
       title: 'Verifying with Pathway A',
       text: [
-        'Verifying with Pathway A tests your existing assessment and teaching sequence against what the course intended, showing where design and delivery have drifted apart.',
+        'Verifying with Pathway A tests the existing assessment and teaching sequence against what the course intended, showing where design and delivery have drifted apart.',
         'It suits cases where the intent is already clear.',
       ],
       need: ['The course’s CLOs', 'A rough sense of how much each one matters', 'The teaching schedule and assignment due weeks', 'The current assignment weights, to compare against'],
@@ -26,7 +26,7 @@ const PC_CONTENT = {
         'New design only runs through Pathway A. There is nothing yet to verify, and no finished rubrics for Pathway B to read from.',
         'Starting from outcomes means the assignment weights and rubric composition are built from intent rather than inherited, before a single brief is written.',
       ],
-      need: ['Draft CLOs', 'A planned teaching sequence', 'The assignments you expect to set, even roughly'],
+      need: ['Draft CLOs', 'A planned teaching sequence', 'The assignments expected, even roughly'],
     },
   },
   B: {
@@ -35,7 +35,7 @@ const PC_CONTENT = {
       title: 'Verifying with Pathway B',
       text: [
         'Pathway B starts from what already exists: the assignments and rubric criteria students actually meet. From those it derives the CLO weighting they imply.',
-        'It suits verification when the assessments are finished and you want a read of what they emphasise before bringing intent into it. Where the derived weighting surprises you is where to look.',
+        'It suits verification when the assessments are finished and you want a read of what they emphasise before bringing intent into it. Where the derived weighting surprises is where to look.',
       ],
       need: ['The assignments and their weights', 'Rubrics or marking guides with criteria you can tag to CLOs'],
     },
@@ -65,9 +65,9 @@ function PathwayContext({ pathway }) {
   };
   const c = data[ctx];
   return (
-    <section className={`pc is-${pathway.toLowerCase()}`} aria-label="Your context">
+    <section className={`pc is-${pathway.toLowerCase()}`} aria-label="Context">
       <div className="pc-head">
-        <span className="pc-label">Your context</span>
+        <span className="pc-label">Context</span>
         <div className="pc-tabs" role="tablist">
           {keys.map((k) => (
             <button key={k} role="tab" aria-selected={ctx === k} className={`pc-tab ${ctx === k ? 'is-on' : ''}`} onClick={() => choose(k)}>{data[k].tab}</button>

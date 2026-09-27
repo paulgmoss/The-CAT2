@@ -72,7 +72,7 @@ function PbbImplied() {
       <PabSeg segs={implied} />
       <PabAxis segs={implied} names={n} />
       <div className="pab-arrow">set beside</div>
-      <span className="pab-cap">Intended · what you meant the course to weigh</span>
+      <span className="pab-cap">Intended · what the course was meant to weigh</span>
       <PabSeg segs={intended} />
       <PabAxis segs={intended} names={n} />
       <p className="pab-foot">CLO 2 is 10 + 10 + 12 = 32%. CLO 4, meant to carry 20%, is only assessed by one criterion in A3, so it lands at 12%.</p>
@@ -151,7 +151,7 @@ function PathwayBBuild() {
       </>}><PbbContribution /></PabStep>
       <PabStep pathway="B" n="04" name="The implied weighting" copy={<>
         <p>Add up every criterion tagged to a CLO and you have that CLO’s implied weighting: what the assessment actually says the course is about.</p>
-        <p className="pab-key">Set it beside what you intended. Outcomes considered central may carry less or more than expected; that is the gap between how a course is described and how it is assessed.</p>
+        <p className="pab-key">Set it beside what was intended. Outcomes considered central may carry less or more than expected; that is the gap between how a course is described and how it is assessed.</p>
       </>}><PbbImplied /></PabStep>
       <PbbConservation />
     </div>
