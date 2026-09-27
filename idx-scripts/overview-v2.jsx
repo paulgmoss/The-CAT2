@@ -22,8 +22,8 @@ function HeroV2() {
         </div>
       </div>
       <div className="hv3-band">
-        <p className="hv3-umbrella">The CAT is an interactive tool for curriculum designers and teaching academics that generates a precise, visual read of how a course's components actually relate to each other, and what happens to each of them when you change any one of them — something you couldn't see before.</p>
-        <a className="hv3-find" href="#when">
+        <p className="hv3-umbrella">The CAT is an interactive tool for curriculum designers and teaching academics that gives you a precise, visual read of how your course's components actually relate to each other, and what happens to each of them when you change any one: something you couldn't see before.</p>
+        <a className="hv3-find" href="#when" onClick={(e) => { e.preventDefault(); history.replaceState(null, '', '#when'); window.dispatchEvent(new CustomEvent('cat:open-tab', { detail: 'when' })); }}>
           <span className="hv3-find-eyebrow">Not sure where to start?</span>
           <span className="hv3-find-title">Find the pathway that fits your course <OvArrow /></span>
           <span className="hv3-find-sub">Two or three quick questions</span>
@@ -286,16 +286,17 @@ function OverviewTabs() {
   const [open, setOpen] = React.useState(fromHash() || 'why');
   const ref = React.useRef(null);
   React.useEffect(() => {
-    const onHash = () => {
-      const h = fromHash();
+    const onHash = (e) => {
+      const h = (e && e.detail) || fromHash();
       if (!h) return;
       setOpen(h);
       const el = ref.current;
       if (el) window.scrollTo(0, el.getBoundingClientRect().top + window.pageYOffset - 12);
     };
     window.addEventListener('hashchange', onHash);
+    window.addEventListener('cat:open-tab', onHash);
     if (fromHash()) setTimeout(onHash, 60);
-    return () => window.removeEventListener('hashchange', onHash);
+    return () => { window.removeEventListener('hashchange', onHash); window.removeEventListener('cat:open-tab', onHash); };
   }, []);
   return (
     <section className="explore-band" id="how" ref={ref}>

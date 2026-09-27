@@ -5,8 +5,8 @@ const PC_CONTENT = {
       tab: 'I’m verifying',
       title: 'Verifying with Pathway A',
       text: [
-        'Pathway A starts from what was intended: how much each CLO matters, when it is taught, and where it is assessed. From those it derives what each assignment should weigh and the rubric/marking criteria structure. Setting that beside the weights the course actually carries shows where design and delivery have drifted apart.',
-        'It suits verification when the intent is clear and you want to test the assessment and the teaching sequence against it.',
+        'Verifying with Pathway A tests your existing assessment and teaching sequence against what the course intended, showing where design and delivery have drifted apart.',
+        'It suits cases where the intent is already clear.',
       ],
       need: ['The course’s CLOs', 'A rough sense of how much each one matters', 'The teaching schedule and assignment due weeks', 'The current assignment weights, to compare against'],
     },
@@ -15,7 +15,7 @@ const PC_CONTENT = {
       title: 'Refining with Pathway A',
       text: [
         'Refining starts with verifying. Enter the course as it stands first, so you know what is there before deciding what to change.',
-        'Pathway A suits refinement when the change sits upstream: the CLO emphasis, the mapping, or when something is taught. Change one of those inputs and the assignment weights and rubric composition re-derive, so you can see the consequences across the course before committing.',
+        'Pathway A suits refinement when the change is upstream, an input rather than an output. Change one and the rest re-derive, so you can see the consequences across the course before committing',
       ],
       need: ['Everything for verifying', 'The change you have in mind, or the question you want answered'],
     },
@@ -79,7 +79,6 @@ function PathwayContext({ pathway }) {
         <div className="pc-main">
           <h2 className="pc-title">{c.title}</h2>
           {c.text.map((t, i) => <p className="pc-text" key={i}>{t}</p>)}
-          <p className="pc-foot">The tabs below follow the tool in order. Along the way you’ll meet the CAT’s principles, each in the tab where it applies.</p>
         </div>
         <div className="pc-side">
           <span className="pc-label">You’ll need</span>
