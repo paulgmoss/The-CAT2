@@ -22,11 +22,11 @@ function HeroV2() {
         </div>
       </div>
       <div className="hv3-band">
-        <p className="hv3-umbrella">The CAT is an interactive tool for curriculum designers and teaching academics that gives you a precise, visual read of how a course's components actually relate to each other, and what happens to each of them when you change any one: something you couldn't see before.</p>
+        <p className="hv3-umbrella">The CAT is an interactive tool for curriculum designers and teaching academics. It gives you a precise, visual read of how a course's components actually relate to each other, and what happens to each of them when you change any one: something you couldn't see before.</p>
         <a className="hv3-find" href="#when" onClick={(e) => { e.preventDefault(); history.replaceState(null, '', '#when'); window.dispatchEvent(new CustomEvent('cat:open-tab', { detail: 'when' })); }}>
           <span className="hv3-find-eyebrow">Not sure where to start?</span>
           <span className="hv3-find-title">Find the pathway that fits the course <OvArrow /></span>
-          <span className="hv3-find-sub">Two or three quick questions</span>
+          <span className="hv3-find-sub"><br /><br /></span>
         </a>
         <p className="hv3-note">The CAT is also an <a href="#research">educational research project</a>. The tool is free to use; research participation is separate and voluntary.</p>
       </div>
@@ -73,7 +73,7 @@ function WhyTab() {
 
 // ─── Tab 2: When to use it (diagnostic) ───
 const DX_CONTEXTS = [
-  { id: 'verifying', num: '01', title: 'Verify an existing course', body: 'Compare what the course assesses with what it was designed to emphasise.', rel: 'A use in its own right.', when: 'An Assurance of Learning cycle, a run of student feedback, an inherited course, or a review coming up.', start: 'v1' },
+  { id: 'verifying', num: '01', title: 'Verify an existing course', body: <>Compare what the course <strong>actually</strong> assesses with what it was designed to <strong>assess</strong></>, rel: 'A use in its own right.', when: 'An Assurance of Learning cycle, a run of student feedback, an inherited course, or a review coming up.', start: 'v1' },
   { id: 'refining', num: '02', title: 'Refine an existing course', body: 'See how a change carries through the rest of the course before you commit to it.', rel: 'Starts with a verification pass: you can’t decide what to change until you’ve checked what’s there.', when: 'The same prompts as verifying, or a change you want to test before it runs live.', start: 'r1' },
   { id: 'designing', num: '03', title: 'Design a new course', body: 'Build the alignment between outcomes, assignments and rubrics before briefs are written.', rel: 'No verification step, since there is nothing yet to check. Pathway A only.', when: 'The course is being built and needs to be aligned from the first draft.', start: 'd1' },
 ];
@@ -278,12 +278,12 @@ function WhatTab() {
 
 function OverviewTabs() {
   const cells = [
-    { key: 'why', num: '01', title: 'Why it matters' },
-    { key: 'when', num: '02', title: 'When to use it' },
+    { key: 'when', num: '01', title: 'When to use it' },
+    { key: 'why', num: '02', title: 'Why it matters' },
     { key: 'what', num: '03', title: 'What the CAT does' },
   ];
   const fromHash = () => { const h = location.hash.slice(1); return cells.some((c) => c.key === h) ? h : null; };
-  const [open, setOpen] = React.useState(fromHash() || 'why');
+  const [open, setOpen] = React.useState(fromHash() || 'when');
   const ref = React.useRef(null);
   React.useEffect(() => {
     const onHash = (e) => {

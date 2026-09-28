@@ -36,8 +36,7 @@ a{color:var(--c-bright)}a:hover{color:var(--c-ink)}
 .ab-contact a{font-family:var(--f-mono);font-size:13.5px;color:var(--c-bright);word-break:break-all}
 .ab-contact a:hover{color:var(--c-ink)}
 
-.ab-team{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-@media (max-width:1100px){.ab-team{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.ab-team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 @media (max-width:560px){.ab-team{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .ab-tile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 10px 14px;background:var(--c-white);border:1px solid var(--c-hairline);border-top:4px solid transparent;border-radius:14px;cursor:pointer;text-align:center;font-family:inherit;transition:border-color 160ms,background 160ms,transform 160ms}
 .ab-tile:hover{border-color:rgba(131,107,255,.35);transform:translateY(-2px)}

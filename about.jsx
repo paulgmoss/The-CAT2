@@ -27,8 +27,6 @@ const ABOUT_PEOPLE = [
       'Constructive alignment sits at the centre of her curriculum design practice. A central part of her work involves meeting academics where they are, providing pedagogical advice calibrated to their context, and co-developing design decisions collaboratively. Her PhD in Knowledge Management is from University of Adelaide. As an educational researcher, Sasi specialises in innovative curriculum design, constructive alignment and assessment design.',
       'She co-developed the CAT with Paul Moss to bring that same collaborative, in-context approach to constructive alignment into a tool academics can use directly.'] },
   { id: 'aaron', name: 'Aaron Honson', short: 'Teaching and Learning Innovation', role: 'Teaching and Learning Innovation, Adelaide University', bio: null },
-  { id: 'daniel', name: 'Daniel Searson', short: 'Teaching and Learning Innovation', role: 'Teaching and Learning Innovation, Adelaide University', bio: null },
-  { id: 'ryan', name: 'Ryan Barber', short: 'Teaching and Learning Innovation', role: 'Teaching and Learning Innovation, Adelaide University', bio: null },
 ];
 
 function AboutPeople() {
@@ -75,9 +73,9 @@ function AboutPage() {
         </section>
         <div className="ab-main">
           <AboutSec k="01" h="The project" label="About · Project">
-            <p className="ab-p">The CAT is a free tool that was conceptually co-developed by Paul Moss and Dr Sasikala Rathnappulige at Adelaide University, growing out of their collaborative work in academic development and curriculum design.</p>
-            <p className="ab-p">Daniel Searson and Ryan Barber helped Paul translate the idea into a working Excel tool, and Aaron Honson turned that into the interactive tool it is today. All five work in the Teaching and Learning Innovation unit at Adelaide University.</p>
-            <p className="ab-p">Paul’s doctoral research studies how engaging with the CAT itself functions as a form of professional learning for the academics who use it.</p>
+            <p className="ab-p">The CAT is a free tool that was conceptually co-developed by Paul Moss and Dr Sasikala Rathnappulige and turned into the tool it is today by Aaron Honson. All three work at Adelaide University. The project emanated out of their collaborative work in academic development and curriculum design.</p>
+            <p className="ab-p">Paul and Sasi would like to acknowledge Daniel Searson and Ryan Barber from Adelaide University who helped translate the idea into a working Excel tool.</p>
+            <p className="ab-p">The CAT is part of Paul’s doctoral research, investigating how engaging with the CAT itself might function as a form of professional learning for the academics who use it.</p>
           </AboutSec>
           <AboutSec k="02" h="The people" label="About · People">
             <AboutPeople />
